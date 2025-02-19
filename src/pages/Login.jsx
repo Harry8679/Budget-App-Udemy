@@ -11,13 +11,27 @@ const Login = ({ setUser }) => {
     e.preventDefault();
     try {
       const res = await API.post("/auth/login", form);
+      console.log("Réponse de l'API :", res.data);
+      
       localStorage.setItem("token", res.data.token);
       setUser(res.data);
       navigate("/");
     } catch (err) {
+      console.error("Erreur lors de la connexion :", err.response?.data || err);
       alert("Identifiants incorrects !");
     }
-  };
+  };  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const res = await API.post("/auth/login", form);
+  //     localStorage.setItem("token", res.data.token);
+  //     setUser(res.data);
+  //     navigate("/");
+  //   } catch (err) {
+  //     alert("Identifiants incorrects !");
+  //   }
+  // };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
